@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSpring, animated } from 'react-spring';
 import {
   SidebarContainer,
   Icon,
@@ -10,23 +11,33 @@ import {
   SidebarMenu,
 } from './Sidebar.style';
 const Sidebar = ({ isOpen, toggle }) => {
+  const animation = useSpring({
+    config: {
+      duration: 1000,
+    },
+  });
+
   return (
-    <SidebarContainer isOpen={isOpen} onClick={toggle}>
-      <Icon onClick={toggle}>
-        <CloseIcon />
-      </Icon>
-      <SidebarWrapper>
-        <SidebarMenu>
-          <SidebarLink to="/about">About</SidebarLink>
-          <SidebarLink to="/services">Services</SidebarLink>
-          <SidebarLink to="/contact-us">Contact Us</SidebarLink>
-          <SidebarLink to="/signup">Sign Up</SidebarLink>
-        </SidebarMenu>
-        <SideBtnWrap>
-          <SidebarRoute to="/signin">Sign In</SidebarRoute>
-        </SideBtnWrap>
-      </SidebarWrapper>
-    </SidebarContainer>
+    <animated.div style={animation}>
+      <SidebarContainer isOpen={isOpen}>
+        <Icon onClick={toggle}>
+          <CloseIcon />
+        </Icon>
+        <SidebarWrapper>
+          <SidebarMenu onClick={toggle}>
+            <SidebarLink to="/about">About</SidebarLink>
+            <SidebarLink to="/services">Services</SidebarLink>
+            <SidebarLink to="/contact-us">Contact Us</SidebarLink>
+            <SidebarLink to="/signup">Sign Up</SidebarLink>
+          </SidebarMenu>
+          <SideBtnWrap>
+            <SidebarRoute onClick={toggle} to="/signin">
+              Sign In
+            </SidebarRoute>
+          </SideBtnWrap>
+        </SidebarWrapper>
+      </SidebarContainer>
+    </animated.div>
   );
 };
 
