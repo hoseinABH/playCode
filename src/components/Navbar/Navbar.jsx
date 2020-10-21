@@ -7,14 +7,14 @@ import {
   NavLink,
   Bars,
 } from './Navbar.style';
-const Navbar = () => {
+const Navbar = ({ toggle }) => {
   return (
     <>
       <Nav>
         <NavLink to="/">
           <img src={require('../../assets/images/logo.svg')} alt="logo" />
         </NavLink>
-        <Bars />
+        <Bars onClick={toggle} />
         <NavMenu>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/services">Services</NavLink>

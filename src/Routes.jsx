@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
+import Header from './components/Header/Header';
 import GlobalStyle from './globalStyles';
 import Home from './Pages/Home/Home';
 
@@ -8,7 +8,7 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Navbar />
+      <Header />
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>
