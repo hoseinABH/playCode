@@ -8,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  ::selection{
+    background:#3a3b3d;
+    color:white
+  }
 `;
 
 export default GlobalStyle;
