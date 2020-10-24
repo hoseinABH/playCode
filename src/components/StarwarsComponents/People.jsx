@@ -9,11 +9,11 @@ const People = () => {
     return res.json();
   };
 
-  const { data, status } = useQuery('people', fetchPeoples);
+  const { data, status } = useQuery('people', fetchPeoples, {});
   console.log(data);
   return (
     <div>
-      <h1>Planets</h1>
+      <h1>People</h1>
       {status === 'loading' && <h4>Loading Data...</h4>}
       {status === 'error' && (
         <h4>

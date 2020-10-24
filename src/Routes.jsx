@@ -6,7 +6,7 @@ import About from './Pages/About/About';
 import Home from './Pages/Home/Home';
 import Starwars from './Pages/Starwars/Starwars';
 import CountProvider from './Providers/CountProvider';
-
+import { ReactQueryDevtools } from 'react-query-devtools';
 const Routes = () => {
   return (
     <CountProvider>
@@ -19,6 +19,7 @@ const Routes = () => {
           <Route exact path="/starwars" component={Starwars} />
         </Switch>
       </BrowserRouter>
+      <ReactQueryDevtools />
     </CountProvider>
   );
 };

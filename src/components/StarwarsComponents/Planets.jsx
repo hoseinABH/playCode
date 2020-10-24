@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { usePaginatedQuery } from 'react-query';
 import styled from 'styled-components';
 import PlanetSingle from './PlanetSingle';
 
@@ -9,14 +9,38 @@ export const List = styled.ul`
   flex-direction: column;
   min-width: 100%;
 `;
+
+export const PageButtons = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 5rem;
+`;
+export const PaginateButton = styled.button`
+  cursor: pointer;
+  outline: none;
+  padding: 0.3rem;
+`;
 const Planets = () => {
-  const fetchPlanets = async () => {
-    const res = await fetch('http://swapi.dev/api/planets/');
+  const [page, setPage] = React.useState(1);
+  const fetchPlanets = async (id, page) => {
+    const res = await fetch(`http://swapi.dev/api/planets/?page=${page}`);
     return res.json();
   };
 
-  const { data, status } = useQuery('planets', fetchPlanets);
-  console.log(data);
+  const { resolvedData, latestData, status } = usePaginatedQuery(
+    ['planets', page],
+    fetchPlanets,
+    {}
+  );
+
+  const nextClickHandler = () => {
+    setPage((page) => (!latestData || !latestData.next ? page : page + 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  const prevClickHandler = () => {
+    setPage(page > 1 ? (page) => page - 1 : page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   return (
     <div>
       <h1>Planets</h1>
@@ -37,11 +61,20 @@ const Planets = () => {
               ✅
             </span>{' '}
           </h4>
+
           <List>
-            {data.results.map((planet) => (
+            {resolvedData.results.map((planet) => (
               <PlanetSingle key={planet.name} planet={planet} />
             ))}
           </List>
+
+          <PageButtons>
+            <PaginateButton onClick={prevClickHandler}>◀</PaginateButton>
+            <p style={{ margin: 'auto 1rem' }}>{page}</p>
+            <PaginateButton disabled={!latestData} onClick={nextClickHandler}>
+              ▶
+            </PaginateButton>
+          </PageButtons>
         </>
       )}
     </div>
