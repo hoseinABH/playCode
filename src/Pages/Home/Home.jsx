@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Counter from '../../components/Counter';
-import DisplayCounter from '../../components/DisplayCounter';
+import Counter from '../../components/Counter/Counter';
+import DisplayCounter from '../../components/Counter/DisplayCounter';
 import { Modal } from '../../components/Modal';
 export const Button = styled.button`
   min-width: 100px;

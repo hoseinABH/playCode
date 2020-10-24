@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCountState } from '../Providers/CountProvider';
+import { useCountState } from '../../Providers/CountProvider';
 
 const DisplayCounter = () => {
   const count = useCountState();
